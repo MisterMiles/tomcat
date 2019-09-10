@@ -1,0 +1,14 @@
+[tomcat]
+tomcat.dev ansible_host=192.168.122.10
+
+# all are part of the group vagrant:
+[vagrant]
+tomcat
+
+[all:vars]
+host_key_checking=False
+ansible_connection=ssh
+ansible_user=vagrant
+become_user=vagrant
+deploy_user=vagrant
+ansible_private_key_file=.vagrant/private_key
