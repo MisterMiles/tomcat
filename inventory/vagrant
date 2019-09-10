@@ -1,9 +1,7 @@
 [tomcat]
-tomcat.dev ansible_host=192.168.122.10
+tomcat-1 ansible_host=192.168.133.10
 
 # all are part of the group vagrant:
-[vagrant]
-tomcat
 
 [all:vars]
 host_key_checking=False

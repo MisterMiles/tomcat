@@ -1,5 +1,5 @@
 ---
-hosts: tomcat
+- hosts: tomcat
   become: yes
   roles:
     - bootstrap
