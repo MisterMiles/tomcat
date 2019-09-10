@@ -9,6 +9,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     domain.memory = 2048
     domain.cpu_mode = "host-model"
     domain.nested = true
+    domain.storage_pool_name = "devel"
+    domain.driver = "kvm"
     domain.random :model => 'random' # Passthrough /dev/random
   end
 
@@ -24,18 +26,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     system.vm.host_name = "#{name}"
     system.vm.provision "ansible" do |ansible|
         ansible.playbook = "#{name}.yml"
-        ansible.inventory_path = "inventories/vagrant"
+        ansible.inventory_path = "inventory/vagrant"
         ansible.limit = "all" # run ansible in parallel for all machines
         ansible.verbose = "vv"
+        ansible.compatibility_mode = "2.0"
       end
     end
   end
 
   config.vm.define :tomcat do |tomcat|
-    tomcat.vm.hostname = "tomcat.dev"
-    tomcat.vm.network :private_network,
-                      :libvirt__network_name => 'default',
-                      :libvirt__dhcp_enabled => false,
-                      :ip => "192.168.122.10"
+    tomcat.vm.hostname = "tomcat-1"
+    tomcat.vm.network :private_network, ip: "192.168.133.10"
   end
 end
