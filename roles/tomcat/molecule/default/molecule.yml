@@ -1,4 +1,7 @@
 ---
+scenario:
+  name: kvm
+
 driver:
   name: vagrant
   provider:
@@ -25,9 +28,6 @@ provisioner:
 lint:
   name: yamllint
   enabled: false
-
-scenario:
-  name: kvm
 
 verifier:
   name: testinfra
