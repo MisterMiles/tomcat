@@ -20,12 +20,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   #hostnames = ['router','desktop','laptop','nas','htpc']
-  hostnames = ['tomcat']
+  hostnames = ['app_server']
   hostnames.each do |name|
   config.vm.define "#{name}" do |system|
     system.vm.host_name = "#{name}"
     system.vm.provision "ansible" do |ansible|
-        ansible.playbook = "#{name}.yml"
+        ansible.playbook = "#{name}-setup.yml"
         ansible.inventory_path = "inventory/vagrant"
         ansible.limit = "all" # run ansible in parallel for all machines
         ansible.verbose = "vv"
