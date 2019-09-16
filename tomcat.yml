@@ -2,4 +2,4 @@
 - hosts: tomcat
   become: yes
   roles:
-    - bootstrap
+    - tomcat
