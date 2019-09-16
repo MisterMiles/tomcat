@@ -1,18 +1,41 @@
 ---
-dependency:
-  name: galaxy
 driver:
-  name: docker
-lint:
-  name: yamllint
+  name: vagrant
+  provider:
+    name: libvirt
+    type: libvirt
+    options:
+      memory: 1024
+      cpus: 1
+
 platforms:
-  - name: instance
-    image: centos:7
+  - name: centos7
+    box: centos/7
+
 provisioner:
   name: ansible
+  log: true
   lint:
     name: ansible-lint
+    enabled: false
+  playbooks:
+    prepare: ../shared/prepare.yml
+    converge: ../shared/playbook.yml
+
+lint:
+  name: yamllint
+  enabled: false
+
+scenario:
+  name: kvm
+
 verifier:
   name: testinfra
+  directory: ../shared/tests
   lint:
     name: flake8
+  options:
+    # show which tests where executed in test output
+    v: 1
+
+
