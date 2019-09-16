@@ -1,0 +1,6 @@
+---
+- hosts: app-servers
+  become: yes
+  become_method: sudo
+  roles:
+    - tomcat

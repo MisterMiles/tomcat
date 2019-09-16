@@ -1,5 +1,0 @@
----
-- hosts: tomcat
-  become: yes
-  roles:
-    - tomcat
